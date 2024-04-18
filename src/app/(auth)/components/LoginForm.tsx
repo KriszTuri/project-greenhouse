@@ -9,19 +9,18 @@ import { useMutation } from "@blitzjs/rpc"
 import { useSearchParams } from "next/navigation"
 import { useRouter } from "next/navigation"
 import type { Route } from "next"
+import { SignUpModal } from "./SignUpButton"
+import { Box } from "@chakra-ui/react"
 
 type LoginFormProps = {
   onSuccess?: (user: PromiseReturnType<typeof login>) => void
 }
-
 export const LoginForm = (props: LoginFormProps) => {
   const [loginMutation] = useMutation(login)
   const router = useRouter()
   const next = useSearchParams()?.get("next")
   return (
     <>
-      <h1>Login</h1>
-
       <Form
         submitText="Login"
         schema={Login}
@@ -53,10 +52,6 @@ export const LoginForm = (props: LoginFormProps) => {
           <Link href={"/forgot-password"}>Forgot your password?</Link>
         </div>
       </Form>
-
-      <div style={{ marginTop: "1rem" }}>
-        Or <Link href="/signup">Sign Up</Link>
-      </div>
     </>
   )
 }
