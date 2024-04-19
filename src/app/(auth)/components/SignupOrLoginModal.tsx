@@ -1,7 +1,5 @@
 "use client"
-import styles from "../../styles/Home.module.css"
 import {
-  Box,
   Button,
   Modal,
   ModalBody,
@@ -10,22 +8,20 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  useDisclosure,
 } from "@chakra-ui/react"
 import { LoginForm } from "./LoginForm"
 import { SignupForm } from "./SignupForm"
-import { useState } from "react"
+import { Dispatch, SetStateAction } from "react"
 
 type ModalProps = {
-  modalBody: string
+  modalType: string
   isOpen: boolean
   onClose: () => void
+  setModalType: Dispatch<SetStateAction<string>>
 }
 
 export const SignupOrLoginModal = (props: ModalProps) => {
-  const [modalType, setModalType] = useState(props.modalBody)
-
-  if (modalType == "login") {
+  if (props.modalType == "login") {
     return (
       <>
         <Modal isOpen={props.isOpen} onClose={props.onClose}>
@@ -44,7 +40,7 @@ export const SignupOrLoginModal = (props: ModalProps) => {
                 Already have an account?
                 <Button
                   onClick={() => {
-                    setModalType("signup")
+                    props.setModalType("signup")
                   }}
                 >
                   Sign up
@@ -56,7 +52,7 @@ export const SignupOrLoginModal = (props: ModalProps) => {
       </>
     )
   }
-  if (modalType == "signup") {
+  if (props.modalType == "signup") {
     return (
       <>
         <Modal isOpen={props.isOpen} onClose={props.onClose}>

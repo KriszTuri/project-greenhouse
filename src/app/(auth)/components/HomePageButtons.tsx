@@ -1,30 +1,16 @@
 "use client"
-import styles from "../../styles/Home.module.css"
-import {
-  Box,
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure,
-} from "@chakra-ui/react"
-import { LoginForm } from "./LoginForm"
-import { SignupForm } from "./SignupForm"
+import { useDisclosure } from "@chakra-ui/react"
 import { useState } from "react"
 import { LoginButton } from "./LoginButton"
 import { SignUpButton } from "./SignUpButton"
 
 export const HomePageButtons = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const [modalType, setModalType] = useState("")
 
   return (
     <>
-      <LoginButton /*setModalType={setModalType}*/ />
-      <SignUpButton /*setModalType={setModalType}*/ />
+      <LoginButton modalType={modalType} setModalType={setModalType} />
+      <SignUpButton modalType={modalType} setModalType={setModalType} />
     </>
   )
 }
