@@ -9,8 +9,8 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react"
-import { LoginForm } from "./LoginForm"
-import { SignupForm } from "./SignupForm"
+import { LoginForm } from "../(auth)/components/LoginForm"
+import { SignupForm } from "../(auth)/components/SignupForm"
 import { Dispatch, SetStateAction } from "react"
 
 type ModalProps = {

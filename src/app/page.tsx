@@ -1,10 +1,9 @@
 import { invoke } from "./blitz-server"
-import { LogoutButton } from "./(auth)/components/LogoutButton"
 import styles from "./styles/Home.module.css"
 import getCurrentUser from "./users/queries/getCurrentUser"
 import { ChakraProvider } from "@chakra-ui/react"
-import { Header } from "./(auth)/components/Header"
-import { HomePageButtons } from "./(auth)/components/HomePageButtons"
+import { Header } from "./components/Header"
+import LandingPageTextField from "./components/LandingPageTextField"
 
 export default async function Home() {
   const currentUser = await invoke(getCurrentUser, null)
@@ -19,6 +18,9 @@ export default async function Home() {
               <div>
                 <Header currentUser={currentUser} />
               </div>
+              <div>
+                <LandingPageTextField />
+              </div>
             </div>
           </main>
 
@@ -31,6 +33,15 @@ export default async function Home() {
               className={styles.textLink}
             >
               Blitz.js
+            </a>
+            <span>&</span>
+            <a
+              href="https://support.freepik.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.textLink}
+            >
+              Freepik.com
             </a>
           </footer>
         </div>

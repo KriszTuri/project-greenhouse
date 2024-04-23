@@ -59,20 +59,10 @@
 
 .globe {
   position: fixed;
-  width: 350vmin;
-  height: 75vmin;
-  left: 20%;
-  top: 50%;
-  transform: translate(-50%, calc(-50% + 40px));
+  width: 100%;
+  height: 100%;
+  background-image: url("../../../public/bg.jpg");
   z-index: -1;
-  border-radius: 100%;
-  background-image: radial-gradient(
-    95.63% 95.63% at 95.92% 0%,
-    rgba(255, 255, 255, 0.62) 0%,
-    #55ff6038 60.42%,
-    #043a01b4 169%
-  );
-  filter: blur(8vmin);
 }
 
 .footer {
@@ -133,10 +123,14 @@
   color: rgb(124, 58, 237);
 }
 
+.adoptText:hover {
+  text-decoration: none;
+}
+
 .textLink {
-  color: rgb(124, 58, 237);
-  background: linear-gradient(to right, rgba(231, 216, 246, 1), rgba(231, 216, 246, 1)),
-    linear-gradient(to right, rgba(99, 1, 235, 1), rgba(124, 58, 237, 1), rgba(231, 216, 246, 1));
+  color: #5b7f12;
+  background: linear-gradient(to right, #a4af8e, #eafbc9),
+    linear-gradient(to right, #5b7f12, #81b618, #eafbc9);
   background-size: 100% 1px, 0 1px;
   background-position: 100% 100%, 0 100%;
   background-repeat: no-repeat;
@@ -191,9 +185,6 @@
   color: white;
   text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
   padding: 0 24px;
-  /*height: 48px;
-  width: 200px;
-  max-width: 300px;*/
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -212,20 +203,27 @@
 .button:hover {
   color: white;
   text-shadow: rgb(0 0 0 / 56%) 0px 3px 12px;
-  box-shadow: rgb(80 63 205 / 50%) 0px 1px 40px;
+  box-shadow: #503fcd80 0px 1px 40px;
 }
 
 .loginButton {
   composes: button;
-  background: rgb(248 250 252);
+  background: rgba(91, 127, 18, 1);
   border: 1px solid rgb(231, 216, 246);
-  color: rgb(30 41 59);
+  color: rgba(91, 127, 18, 1);
   text-shadow: none;
 }
 
 .loginButton:hover {
-  color: rgb(30 41 59);
+  color: white;
   text-shadow: none;
+  box-shadow: #9ae6b4 0px 1px 40px;
+}
+
+.signupButton:hover {
+  color: white;
+  text-shadow: none;
+  box-shadow: #f6ad55 0px 1px 40px;
 }
 
 .card:hover .arrowIcon {

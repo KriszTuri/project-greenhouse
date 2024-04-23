@@ -4,7 +4,6 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
@@ -13,14 +12,14 @@ import {
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
   Center,
-  Square,
+  Spacer,
 } from "@chakra-ui/react"
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons"
 import { HomePageButtons } from "./HomePageButtons"
 import { LogoutButton } from "./LogoutButton"
+import SearchBar from "./SearchBar"
 
 type NavBarProps = {
   currentUser: {
@@ -61,17 +60,20 @@ export default function WithSubnavigation(props: NavBarProps) {
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
           <Flex display={{ base: "none", md: "flex" }} ml={10}>
-            <Center w="100px">
-              {" "}
-              <Image src="/logo.png" boxSize="100px" alt="PGH Logo" />{" "}
-            </Center>
-            <Center w="180px">
-              <DesktopNav />{" "}
+            <Center w="350px">
+              <DesktopNav />
             </Center>
           </Flex>
         </Flex>
-
+        <Spacer />
+        <Center>
+          <Image src="/logo.png" objectFit="cover" boxSize="100px" alt="PGH Logo" />
+        </Center>
+        <Spacer />
         <Stack flex={{ base: 1, md: 1 }} justify={"flex-end"} direction={"row"} spacing={6}>
+          <Center>
+            <SearchBar />
+          </Center>
           {props.currentUser ? (
             <>
               <Center>
@@ -151,11 +153,11 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
       display={"block"}
       p={2}
       rounded={"md"}
-      _hover={{ bg: useColorModeValue("pink.50", "gray.900") }}
+      _hover={{ bg: useColorModeValue("green.50", "gray.900") }}
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text transition={"all .3s ease"} _groupHover={{ color: "pink.400" }} fontWeight={500}>
+          <Text transition={"all .3s ease"} _groupHover={{ color: "green.400" }} fontWeight={500}>
             {label}
           </Text>
           <Text fontSize={"sm"}>{subLabel}</Text>
@@ -169,7 +171,7 @@ const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
           align={"center"}
           flex={1}
         >
-          <Icon color={"pink.400"} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={"green.400"} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
@@ -245,6 +247,10 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
+    label: "Home",
+    href: "#",
+  },
+  {
     label: "About",
     children: [
       {
@@ -274,8 +280,8 @@ const NAV_ITEMS: Array<NavItem> = [
       },
     ],
   },
-  /*{
-    label: "Learn Design",
+  {
+    label: "Contact",
     href: "#",
-  },*/
+  },
 ]

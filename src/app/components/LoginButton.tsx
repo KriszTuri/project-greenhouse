@@ -1,5 +1,5 @@
 "use client"
-import styles from "../../styles/Home.module.css"
+import styles from "../styles/Home.module.css"
 import { Button, useDisclosure } from "@chakra-ui/react"
 import { SignupOrLoginModal } from "./SignupOrLoginModal"
 import { Dispatch, SetStateAction } from "react"
@@ -19,7 +19,7 @@ export const LoginButton = (props: LoginButtonProps) => {
   return (
     <>
       <Button
-        className={styles.button}
+        className={styles.loginButton}
         colorScheme="green"
         onClick={() => {
           onClickHandler()
