@@ -1,15 +1,21 @@
 "use client"
-import { Container, Image } from '@chakra-ui/react'
+import { Container, Image } from "@chakra-ui/react"
 import logo from "../public/logo.png"
+import Navbar from "./Navbar"
 
-export function Header() {
+type HeaderProps = {
+  currentUser: {
+    id: number
+    email: string
+    name: string | null
+    role: string
+  } | null
+}
+
+export function Header(props: HeaderProps) {
   return (
     <>
-    <Container centerContent>
-        <Image 
-            src="/logo.png" 
-            boxSize="100px"/>
-    </Container>
+      <Navbar currentUser={props.currentUser} />
     </>
   )
 }

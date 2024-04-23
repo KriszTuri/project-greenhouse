@@ -3,21 +3,22 @@ import styles from "../../styles/Home.module.css"
 import logout from "../mutations/logout"
 import { useRouter } from "next/navigation"
 import { useMutation } from "@blitzjs/rpc"
+import { Button } from "@chakra-ui/react"
 
 export function LogoutButton() {
   const router = useRouter()
   const [logoutMutation] = useMutation(logout)
   return (
     <>
-      <button
-        className={styles.button}
+      <Button
+        colorScheme="green"
         onClick={async () => {
           await logoutMutation()
           router.refresh()
         }}
       >
         Logout
-      </button>
+      </Button>
     </>
   )
 }

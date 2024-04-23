@@ -16,27 +16,8 @@ export default async function Home() {
         <div className={styles.container}>
           <main className={styles.main}>
             <div className={styles.wrapper}>
-              <div className={styles.header}>
-                <Header />
-                <div className={styles.logo}></div>
-                {/* Auth */}
-
-                <div className={styles.buttonContainer}>
-                  {currentUser ? (
-                    <>
-                      <LogoutButton />
-                      <div>
-                        User id: <code>{currentUser.id}</code>
-                        <br />
-                        User role: <code>{currentUser.role}</code>
-                      </div>
-                    </>
-                  ) : (
-                    <>
-                      <HomePageButtons />
-                    </>
-                  )}
-                </div>
+              <div>
+                <Header currentUser={currentUser} />
               </div>
             </div>
           </main>

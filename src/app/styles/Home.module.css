@@ -69,8 +69,8 @@
   background-image: radial-gradient(
     95.63% 95.63% at 95.92% 0%,
     rgba(255, 255, 255, 0.62) 0%,
-    #8155ff38 60.42%,
-    #002fff5c 169%
+    #55ff6038 60.42%,
+    #043a01b4 169%
   );
   filter: blur(8vmin);
 }
@@ -191,9 +191,9 @@
   color: white;
   text-shadow: rgba(0, 0, 0, 0.25) 0px 3px 8px;
   padding: 0 24px;
-  height: 48px;
+  /*height: 48px;
   width: 200px;
-  max-width: 300px;
+  max-width: 300px;*/
   position: relative;
   display: inline-flex;
   justify-content: center;
@@ -203,7 +203,8 @@
   white-space: nowrap;
   border-radius: 0.75rem;
   border-bottom-left-radius: 0px;
-  font-size: 15px;
+  font-size: small;
+  font-weight: 600;
   transition: all 0.3s ease 0s;
   cursor: pointer;
 }
