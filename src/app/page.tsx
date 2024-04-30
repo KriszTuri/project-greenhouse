@@ -1,7 +1,7 @@
 import { invoke } from "./blitz-server"
 import styles from "./styles/Home.module.css"
 import getCurrentUser from "./users/queries/getCurrentUser"
-import { ChakraProvider } from "@chakra-ui/react"
+import { Box, ChakraProvider } from "@chakra-ui/react"
 import { Header } from "./components/Header"
 import LandingPageTextField from "./components/LandingPageTextField"
 
@@ -11,16 +11,15 @@ export default async function Home() {
   return (
     <>
       <ChakraProvider>
+        <Box sx={{ position: "sticky" }} width="100%">
+          <Header currentUser={currentUser} />
+        </Box>
+
         <div className={styles.globe} />
         <div className={styles.container}>
           <main className={styles.main}>
             <div className={styles.wrapper}>
-              <div>
-                <Header currentUser={currentUser} />
-              </div>
-              <div>
-                <LandingPageTextField />
-              </div>
+              <LandingPageTextField />
             </div>
           </main>
 

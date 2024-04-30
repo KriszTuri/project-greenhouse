@@ -45,6 +45,8 @@ export default function WithSubnavigation(props: NavBarProps) {
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
+        position="fixed"
+        width="100%"
       >
         <Flex
           flex={{ base: 1, md: "auto" }}

@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css"
 export default function LandingPageTextField() {
   return (
     <>
-      <Flex paddingLeft="150px" paddingTop="100px">
+      <Flex paddingLeft="150px" paddingTop="200px">
         <Stack direction="column">
           <Box>
             <Text fontSize="6xl" as="b">
