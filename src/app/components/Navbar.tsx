@@ -20,6 +20,7 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from "@ch
 import { HomePageButtons } from "./HomePageButtons"
 import { LogoutButton } from "./LogoutButton"
 import SearchBar from "./SearchBar"
+import UserMenu from "./UserMenu"
 
 type NavBarProps = {
   currentUser: {
@@ -79,8 +80,7 @@ export default function WithSubnavigation(props: NavBarProps) {
           {props.currentUser ? (
             <>
               <Center>
-                <Box w="150px"> Greetings, {props.currentUser.name}! </Box>
-                <LogoutButton />
+                <UserMenu currentUser={props.currentUser} />
               </Center>
             </>
           ) : (
