@@ -18,8 +18,9 @@ type UserMenuProps = {
     role: string
   } | null
 }
-type UserName = {
+type UserData = {
   name: string | null | undefined
+  id: number | null | undefined
 }
 
 export default function UserMenu(props: UserMenuProps) {
@@ -34,13 +35,13 @@ export default function UserMenu(props: UserMenuProps) {
         />
       </PopoverTrigger>
       <PopoverContent width="150px">
-        <UserMenuList name={props.currentUser?.name} />
+        <UserMenuList name={props.currentUser?.name} id={props.currentUser?.id} />
       </PopoverContent>
     </Popover>
   )
 }
 
-const UserMenuList = (props: UserName) => {
+const UserMenuList = (props: UserData) => {
   const linkColor = useColorModeValue("gray.600", "gray.200")
   const linkHoverColor = useColorModeValue("gray.800", "white")
 
@@ -57,7 +58,7 @@ const UserMenuList = (props: UserName) => {
         <Box key={menuItem.label}>
           <Link
             p={2}
-            href={menuItem.href ?? "#"}
+            href={`/profiles/${props.id}` ?? "#"}
             fontSize={"m"}
             fontWeight={500}
             color={linkColor}
@@ -77,16 +78,13 @@ const UserMenuList = (props: UserName) => {
 
 interface UserMenuItem {
   label: string
-  href?: string
 }
 
 const USER_MENU_ITEMS: Array<UserMenuItem> = [
   {
     label: "Settings",
-    href: "#",
   },
   {
     label: "Listings",
-    href: "#",
   },
 ]
