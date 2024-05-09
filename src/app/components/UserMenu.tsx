@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Box,
   Image,
   Link,
@@ -27,12 +28,7 @@ export default function UserMenu(props: UserMenuProps) {
   return (
     <Popover trigger={"hover"} placement={"bottom-start"} isLazy>
       <PopoverTrigger>
-        <Image
-          borderRadius="full"
-          boxSize="50px"
-          src="https://via.placeholder.com/50"
-          alt="Profile Picture"
-        />
+        <Avatar />
       </PopoverTrigger>
       <PopoverContent width="150px">
         <UserMenuList name={props.currentUser?.name} id={props.currentUser?.id} />
