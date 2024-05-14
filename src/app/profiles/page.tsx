@@ -6,7 +6,6 @@ import { invoke } from "../blitz-server"
 import { useCurrentUser } from "../users/hooks/useCurrentUser"
 import { BlitzPage } from "@blitzjs/auth"
 import { Profile } from "./components/Profile"
-import getCurrentUserProfileData from "./queries/getCurrentUserProfileData"
 import ProfileList from "./components/ProfileList"
 //import { useSearchParams } from "next/navigation"
 

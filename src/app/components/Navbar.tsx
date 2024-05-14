@@ -70,7 +70,9 @@ export default function WithSubnavigation(props: NavBarProps) {
         </Flex>
         <Spacer />
         <Center>
-          <Image src="/logo.png" objectFit="cover" boxSize="100px" alt="PGH Logo" />
+          <Link href="/">
+            <Image src="/logo.png" objectFit="cover" boxSize="100px" alt="PGH Logo" />
+          </Link>
         </Center>
         <Spacer />
         <Stack flex={{ base: 1, md: 1 }} justify={"flex-end"} direction={"row"} spacing={6}>
@@ -250,7 +252,7 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    href: "#",
+    href: "/",
   },
   {
     label: "About",
@@ -258,12 +260,12 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Project Greenhouse",
         subLabel: "Learn more about PGH",
-        href: "#",
+        href: "/about",
       },
       {
         label: "Team",
         subLabel: "Get to know us",
-        href: "#",
+        href: "/team",
       },
     ],
   },
@@ -284,6 +286,6 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: "Contact",
-    href: "#",
+    href: "/contact",
   },
 ]

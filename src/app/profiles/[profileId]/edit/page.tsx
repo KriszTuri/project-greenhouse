@@ -2,7 +2,7 @@ import { Metadata } from "next"
 import { Suspense } from "react"
 import { invoke } from "src/app/blitz-server"
 import { EditProfile } from "../../components/EditProfile"
-import getCurrentUserProfileData from "../../queries/getCurrentUserProfileData"
+import getCurrentUser from "@/src/app/users/queries/getCurrentUser"
 
 /*export async function generateMetadata({
   currentUser,
@@ -16,7 +16,7 @@ import getCurrentUserProfileData from "../../queries/getCurrentUserProfileData"
 /// Page for /profiles/[id]/edit ///
 
 export default async function Page() {
-  const currentUser = await invoke(getCurrentUserProfileData, null)
+  const currentUser = await invoke(getCurrentUser, null)
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>

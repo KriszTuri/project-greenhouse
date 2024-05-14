@@ -1,16 +1,16 @@
 import { Box, ChakraProvider, Stack } from "@chakra-ui/react"
 import { invoke } from "../../blitz-server"
 import { Profile } from "../components/Profile"
-import getCurrentUserProfileData from "../queries/getCurrentUserProfileData"
 import styles from "../../styles/Profile.module.css"
 import { Header } from "../../components/Header"
-import getUserProfileDataById from "../queries/getUserProfileDataById"
+import getUserById from "../../users/queries/getUserById"
+import getCurrentUser from "../../users/queries/getCurrentUser"
 
 ///Page for /profiles/[id] //
 
 export default async function ProfilePage({ params }: { params: { profileId: string } }) {
-  const currentUser = await invoke(getCurrentUserProfileData, null)
-  const requestedUser = await invoke(getUserProfileDataById, parseInt(params.profileId))
+  const currentUser = await invoke(getCurrentUser, null)
+  const requestedUser = await invoke(getUserById, parseInt(params.profileId))
 
   return (
     <>
