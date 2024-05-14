@@ -1,6 +1,6 @@
 type UserData = {
-  requestedUser: {
-    listings: {
+  requestedUser?: {
+    /*listings: {
       id: number
       createdAt: Date
       updatedAt: Date
@@ -8,7 +8,7 @@ type UserData = {
       listingName: string
       price: number
       description: string
-    }[]
+    }[]*/
     id: number
     email: string
     name: string | null
@@ -17,7 +17,7 @@ type UserData = {
   } | null
 
   currentUser: {
-    listings: {
+    /*listings: {
       id: number
       createdAt: Date
       updatedAt: Date
@@ -25,7 +25,7 @@ type UserData = {
       listingName: string
       price: number
       description: string
-    }[]
+    }[]*/
     id: number
     email: string
     name: string | null
@@ -38,4 +38,28 @@ type DescriptionProps = {
   description: string | null
 }
 
-export type { UserData, DescriptionProps }
+type User = {
+  user: {
+    id: number | undefined
+    email: string
+    name: string | null
+    hashedPassword: string | null
+  } | null
+  /*listings: {
+      id: number
+      createdAt: Date
+      updatedAt: Date
+      userId: number | null
+      listingName: string
+      price: number
+      description: string
+    }[]*/
+}
+
+type UserLoginData = {
+  email: string
+  name: string | null
+  password: string | null
+}
+
+export type { UserData, DescriptionProps, User, UserLoginData }

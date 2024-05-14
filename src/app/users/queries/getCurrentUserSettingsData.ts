@@ -1,17 +1,15 @@
 import { Ctx } from "blitz"
 import db from "db"
 
-export default async function getUserById(id: number | undefined) {
+export default async function getCurrentUserSettingsData(_: null, ctx: Ctx) {
+  if (!ctx.session.userId) return null
   const user = await db.user.findFirst({
-    where: { id: id },
+    where: { id: ctx.session.userId },
     select: {
       id: true,
       name: true,
       email: true,
-      //listings: true,
-      role: true,
-      isOnline: true,
-      description: true,
+      hashedPassword: true,
     },
   })
 
