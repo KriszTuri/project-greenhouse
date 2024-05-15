@@ -4,15 +4,20 @@ import getCurrentUser from "./users/queries/getCurrentUser"
 import { Box, ChakraProvider } from "@chakra-ui/react"
 import { Header } from "./components/Header"
 import LandingPageTextField from "./components/LandingPageTextField"
+import Layout from "./components/Layout"
 
 export default async function Home() {
   const currentUser = await invoke(getCurrentUser, null)
 
   return (
+    <Layout pageType="homepage" currentUser={currentUser} pageContent={<LandingPageTextField />} />
+  )
+
+  /*return (
     <>
       <ChakraProvider>
         <Box sx={{ position: "sticky" }} width="100%">
-          <Header currentUser={currentUser} />
+          <Header user={currentUser} listings={currentUser?.listings} />
         </Box>
 
         <div className={styles.globe} />
@@ -46,5 +51,5 @@ export default async function Home() {
         </div>
       </ChakraProvider>
     </>
-  )
+  )*/
 }

@@ -1,5 +1,5 @@
 import { Text, Box, Link, useColorModeValue, Heading } from "@chakra-ui/react"
-import { DescriptionProps } from "../propsType"
+import { DescriptionProps } from "../../propsType"
 
 export default function ProfileDescription(props: DescriptionProps) {
   return (

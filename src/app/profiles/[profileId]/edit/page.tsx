@@ -6,6 +6,7 @@ import getCurrentUser from "@/src/app/users/queries/getCurrentUser"
 import getUserById from "@/src/app/users/queries/getUserById"
 import { useQuery } from "@blitzjs/rpc"
 import getCurrentUserSettingsData from "@/src/app/users/queries/getCurrentUserSettingsData"
+import Layout from "@/src/app/components/Layout"
 
 /*export async function generateMetadata({
   currentUser,
@@ -20,11 +21,16 @@ import getCurrentUserSettingsData from "@/src/app/users/queries/getCurrentUserSe
 
 export default async function Page() {
   const currentUser = await invoke(getCurrentUserSettingsData, null)
+
   if (currentUser) {
     return (
       <div>
         <Suspense fallback={<div>Loading...</div>}>
-          <EditProfile user={currentUser} />
+          <Layout
+            pageType="page"
+            currentUser={currentUser}
+            pageContent={<EditProfile user={currentUser} listings={undefined} />}
+          />
         </Suspense>
       </div>
     )

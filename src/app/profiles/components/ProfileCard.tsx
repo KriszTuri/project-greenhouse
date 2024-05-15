@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react"
 import ProfileButtons from "./ProfileButtons"
 import ProfilePicture from "./ProfilePicture"
-import { UserData } from "../propsType"
+import { UserData } from "../../propsType"
 import ProfileDescription from "./ProfileDescription"
 
 export default function ProfileCard(props: UserData) {

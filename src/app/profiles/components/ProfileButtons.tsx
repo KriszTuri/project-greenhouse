@@ -1,5 +1,5 @@
 import { Button, Link } from "@chakra-ui/react"
-import { UserData } from "../propsType"
+import { UserData } from "../../propsType"
 
 export default function ProfileButtons(props: UserData) {
   if (props.currentUser?.id == props.requestedUser?.id) {

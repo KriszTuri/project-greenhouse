@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import ProfileCard from "./ProfileCard"
 import { useParams } from "next/navigation"
-import { UserData } from "../propsType"
+import { UserData } from "../../propsType"
 //import deleteProfile from "../mutations/deleteProfile";
 //import getProfile from "../queries/getProfile";
 

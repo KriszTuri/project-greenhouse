@@ -1,30 +1,42 @@
-import { Box, ChakraProvider, Stack } from "@chakra-ui/react"
-import { invoke } from "../../blitz-server"
-import { Profile } from "../components/Profile"
-import styles from "../../styles/Profile.module.css"
-import { Header } from "../../components/Header"
-import getUserById from "../../users/queries/getUserById"
-import getCurrentUser from "../../users/queries/getCurrentUser"
+"use client"
+import { ChakraProvider, Stack, Box } from "@chakra-ui/react"
+import { Profile } from "../profiles/components/Profile"
+import { LayoutProps } from "../propsType"
+import { Header } from "./Header"
+import pageStyles from "../styles/Profile.module.css"
+import homeStyles from "../styles/Home.module.css"
+import { useEffect, useState } from "react"
 
-///Page for /profiles/[id] //
-
-export default async function ProfilePage({ params }: { params: { profileId: string } }) {
-  const currentUser = await invoke(getCurrentUser, null)
-  const requestedUser = await invoke(getUserById, parseInt(params.profileId))
+export default function Layout(props: LayoutProps) {
+  const [body, setBody] = useState<JSX.Element>()
+  const [styles, setStyles] = useState(pageStyles)
+  useEffect(() => {
+    const pageContent = async (content: JSX.Element | Promise<JSX.Element>) => {
+      return await content
+    }
+    const getContent = async () => {
+      const body = await pageContent(props.pageContent)
+      if (props.pageType == "homepage") {
+        setStyles(homeStyles)
+      }
+      setBody(body)
+    }
+    getContent().catch(console.error)
+  }, [props.pageContent, props.pageType])
 
   return (
     <>
       <ChakraProvider>
         <Stack direction="column">
           <Box sx={{ position: "sticky" }} width="100%">
-            <Header user={currentUser} listings={currentUser?.listings} />
+            <Header user={props.currentUser} listings={undefined} />
           </Box>
           <Box>
             <div className={styles.globe} />
             <div className={styles.container}>
               <main className={styles.main}>
-                <div className={styles.wrapper}>
-                  <Profile requestedUser={requestedUser} currentUser={currentUser} />
+                <div className={styles.wrapper} suppressHydrationWarning>
+                  {body}
                 </div>
               </main>
               <footer className={styles.footer}>

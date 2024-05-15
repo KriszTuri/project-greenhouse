@@ -2,20 +2,12 @@
 import { Box, Container, Image } from "@chakra-ui/react"
 import logo from "../public/logo.png"
 import Navbar from "./Navbar"
+import { User } from "../propsType"
 
-type HeaderProps = {
-  currentUser: {
-    id: number
-    email: string
-    name: string | null
-    role: string
-  } | null
-}
-
-export function Header(props: HeaderProps) {
+export function Header(props: User) {
   return (
     <Box>
-      <Navbar currentUser={props.currentUser} />
+      <Navbar user={props.user} listings={undefined} />
     </Box>
   )
 }

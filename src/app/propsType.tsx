@@ -1,3 +1,5 @@
+import { ReactNode } from "react"
+
 type UserData = {
   requestedUser?: {
     /*listings: {
@@ -43,23 +45,43 @@ type User = {
     id: number | undefined
     email: string
     name: string | null
-    hashedPassword: string | null
   } | null
-  /*listings: {
-      id: number
-      createdAt: Date
-      updatedAt: Date
-      userId: number | null
-      listingName: string
-      price: number
-      description: string
-    }[]*/
+  listings:
+    | {
+        id: number
+        createdAt: Date
+        updatedAt: Date
+        userId: number | null
+        listingName: string
+        price: number
+        description: string
+      }[]
+    | undefined
 }
-
+/**
+ * Data to update the user's email, name and password.
+ *
+ * The "id" is only needed for the
+ * query, we do not update it, of course. Password
+ * is hashed in the query statement.
+ *
+ *
+ */
 type UserLoginData = {
+  id: number
   email: string
   name: string | null
   password: string | null
 }
 
-export type { UserData, DescriptionProps, User, UserLoginData }
+type LayoutProps = {
+  currentUser: {
+    id: number
+    email: string
+    name: string | null
+  } | null
+  pageContent: JSX.Element | Promise<JSX.Element>
+  pageType: string
+}
+
+export type { UserData, DescriptionProps, User, UserLoginData, LayoutProps }
