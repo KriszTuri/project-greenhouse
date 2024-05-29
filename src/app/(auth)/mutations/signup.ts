@@ -10,7 +10,7 @@ export default async function signup(
   const email = (input.email as string) || "test" + Math.random() + "@test.com"
   const name = input.name as string
   const user = await db.user.create({
-    data: { name, email, hashedPassword },
+    data: { email, hashedPassword },
   })
 
   await blitzContext.session.$create({
@@ -18,5 +18,9 @@ export default async function signup(
     role: "user",
   })
 
-  return { userId: blitzContext.session.userId, ...user, email: input.email }
+  const profile = await db.profile.create({
+    data: { userId: user.id, name: name },
+  })
+
+  return { userId: blitzContext.session.userId, ...user, email: input.email, profile }
 }

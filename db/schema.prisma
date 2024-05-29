@@ -8,19 +8,16 @@ datasource db {
 }
 
 model User {
-  id             Int        @id @default(autoincrement())
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @updatedAt
-  name           String?
-  email          String     @unique
+  id Int @id @default(autoincrement())
+
+  email          String  @unique
   hashedPassword String?
-  role           String     @default("USER")
-  isOnline       Boolean    @default(false)
-  description    String?
-  isEditing      Boolean    @default(false)
-  listings       Listings[]
-  sessions       Session[]
-  tokens         Token[]
+  role           String  @default("USER")
+
+  listings Listings[]
+  sessions Session[]
+  tokens   Token[]
+  profile  Profile[]
 }
 
 model Session {
@@ -51,6 +48,18 @@ model Token {
   @@unique([hashedToken, type])
 }
 
+model Profile {
+  id          Int      @id @unique @default(autoincrement())
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  userId      Int?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name        String?
+  isOnline    Boolean  @default(false)
+  description String?
+  isEditing   Boolean  @default(false)
+}
+
 model Listings {
   id          Int      @id @default(autoincrement())
   listingName String
@@ -58,6 +67,6 @@ model Listings {
   updatedAt   DateTime @updatedAt
   price       Int
   description String
-  userId      Int?
-  user        User?    @relation(fields: [userId], references: [id])
+  userId      Int
+  user        User     @relation(fields: [userId], references: [id])
 }

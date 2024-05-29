@@ -1,5 +1,17 @@
 import { Box } from "@chakra-ui/react"
+import Layout from "../../components/Layout"
+import { User } from "../../propsType"
 
-export default function ProfileList() {
-  return <Box>Here we will see the list of profiles once I&apos;m done with that</Box>
+export default function ProfileList(user: User) {
+  return (
+    <Layout
+      currentUser={null}
+      pageContent={
+        <>
+          <h1>Profile</h1>
+        </>
+      }
+      pageType={"page"}
+    />
+  )
 }

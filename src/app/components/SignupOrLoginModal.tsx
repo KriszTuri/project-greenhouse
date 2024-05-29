@@ -37,7 +37,7 @@ export const SignupOrLoginModal = (props: ModalProps) => {
             </ModalBody>
             <ModalFooter>
               <div style={{ marginTop: "1rem" }}>
-                Already have an account?
+                Don&apos;t have an account yet?
                 <Button
                   onClick={() => {
                     props.setModalType("signup")

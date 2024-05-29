@@ -44,18 +44,17 @@ export const EditProfile = (props: User) => {
 
   function updateUser(values: UserLoginData) {
     const updatedUser = {
-      user: {
-        id: props.user?.id,
-        email: values.email,
-        name: values.name,
-        hashedPassword: values.password,
-      },
+      id: props.user?.id,
+      email: values.email,
+      name: values.name,
+      password: values.password,
     }
     return updatedUser
   }
 
   async function onSubmit(values: UserLoginData) {
-    updateUser(values)
+    const updatedUser = updateUser(values)
+    updateProfileMutation(updatedUser)
     console.log(updateUser(values))
     router.refresh()
   }

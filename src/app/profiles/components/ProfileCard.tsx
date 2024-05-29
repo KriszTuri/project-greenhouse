@@ -35,7 +35,13 @@ export default function ProfileCard(props: UserData) {
             />
           </>
         ) : (
-          <ProfilePicture isOnline={props.currentUser?.isOnline} />
+          <>
+            <ProfilePicture isOnline={props.currentUser?.isOnline} />
+            <ProfileDescription
+              name={props.currentUser?.name}
+              description={props.currentUser?.description}
+            />
+          </>
         )}
 
         <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>

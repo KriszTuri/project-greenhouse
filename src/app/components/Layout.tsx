@@ -1,5 +1,5 @@
 "use client"
-import { ChakraProvider, Stack, Box } from "@chakra-ui/react"
+import { ChakraProvider, Stack, Box, useColorModeValue } from "@chakra-ui/react"
 import { Profile } from "../profiles/components/Profile"
 import { LayoutProps } from "../propsType"
 import { Header } from "./Header"
@@ -36,7 +36,20 @@ export default function Layout(props: LayoutProps) {
             <div className={styles.container}>
               <main className={styles.main}>
                 <div className={styles.wrapper} suppressHydrationWarning>
-                  {body}
+                  {props.pageType == "page" ? (
+                    <Box
+                      w={"95%"}
+                      bg={"white"}
+                      boxShadow={"2xl"}
+                      rounded={"lg"}
+                      p={6}
+                      textAlign={"center"}
+                    >
+                      {body}
+                    </Box>
+                  ) : (
+                    <>{body}</>
+                  )}
                 </div>
               </main>
               <footer className={styles.footer}>

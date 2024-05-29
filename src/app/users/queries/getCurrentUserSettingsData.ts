@@ -3,15 +3,14 @@ import db from "db"
 
 export default async function getCurrentUserSettingsData(_: null, ctx: Ctx) {
   if (!ctx.session.userId) return null
-  const user = await db.user.findFirst({
+  const userProfile = await db.profile.findFirst({
     where: { id: ctx.session.userId },
     select: {
       id: true,
       name: true,
-      email: true,
-      hashedPassword: true,
+      user: { select: { email: true, hashedPassword: true } },
     },
   })
 
-  return user
+  return userProfile
 }

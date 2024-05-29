@@ -32,19 +32,19 @@ type UserData = {
     email: string
     name: string | null
     isOnline: boolean | null
+    description: string | null
   } | null
 }
 
 type DescriptionProps = {
-  name: string | null
-  description: string | null
+  name: string | null | undefined
+  description: string | null | undefined
 }
 
 type User = {
   user: {
     id: number | undefined
     email: string
-    name: string | null
   } | null
   listings:
     | {
@@ -68,7 +68,7 @@ type User = {
  *
  */
 type UserLoginData = {
-  id: number
+  id: number | undefined
   email: string
   name: string | null
   password: string | null
