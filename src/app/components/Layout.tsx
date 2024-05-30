@@ -29,7 +29,11 @@ export default function Layout(props: LayoutProps) {
       <ChakraProvider>
         <Stack direction="column">
           <Box sx={{ position: "sticky" }} width="100%">
-            <Header user={props.currentUser} listings={undefined} />
+            {props.currentUser ? (
+              <Header user={props.currentUser?.user} name={props.currentUser?.name} />
+            ) : (
+              <Header user={null} name={null} />
+            )}
           </Box>
           <Box>
             <div className={styles.globe} />

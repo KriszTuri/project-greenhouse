@@ -1,8 +1,9 @@
 import { Ctx } from "blitz"
 import db from "db"
 
-export default async function getUserById(id: number | undefined) {
-  const user = await db.profile.findFirst({
+export default async function getUserById(id: number, ctx: Ctx) {
+  const isCurrentUser = ctx.session.userId == id
+  const data = await db.profile.findFirst({
     where: { id: id },
     select: {
       id: true,
@@ -20,5 +21,5 @@ export default async function getUserById(id: number | undefined) {
     },
   })
 
-  return user
+  return { data, isCurrentUser }
 }

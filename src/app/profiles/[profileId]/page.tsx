@@ -4,53 +4,32 @@ import { Profile } from "../components/Profile"
 import styles from "../../styles/Profile.module.css"
 import { Header } from "../../components/Header"
 import getUserById from "../../users/queries/getUserById"
-import getCurrentUser from "../../users/queries/getCurrentUser"
+import { CurrentUser } from "../../propsType"
+import Layout from "../../components/Layout"
 
 ///Page for /profiles/[id] //
 
 export default async function ProfilePage({ params }: { params: { profileId: string } }) {
-  const currentUser = await invoke(getCurrentUser, null)
   const requestedUser = await invoke(getUserById, parseInt(params.profileId))
-
+  function getUserData() {
+    if (requestedUser.data) {
+      const data: CurrentUser = {
+        user: { id: requestedUser.data.id },
+        name: requestedUser.data.name,
+      }
+      return data
+    }
+    return null
+  }
   return (
     <>
-      <ChakraProvider>
-        <Stack direction="column">
-          <Box sx={{ position: "sticky" }} width="100%">
-            <Header user={currentUser} listings={currentUser?.listings} />
-          </Box>
-          <Box>
-            <div className={styles.globe} />
-            <div className={styles.container}>
-              <main className={styles.main}>
-                <div className={styles.wrapper}>
-                  <Profile requestedUser={requestedUser} currentUser={currentUser} />
-                </div>
-              </main>
-              <footer className={styles.footer}>
-                <span>Powered by</span>
-                <a
-                  href="https://blitzjs.com?utm_source=blitz-new&utm_medium=app-template&utm_campaign=blitz-new"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.textLink}
-                >
-                  Blitz.js
-                </a>
-                <span>&</span>
-                <a
-                  href="https://support.freepik.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.textLink}
-                >
-                  Freepik.com
-                </a>
-              </footer>
-            </div>
-          </Box>
-        </Stack>
-      </ChakraProvider>
+      <Layout
+        currentUser={getUserData()}
+        pageContent={
+          <Profile data={requestedUser.data} isCurrentUser={requestedUser.isCurrentUser} />
+        }
+        pageType={"page"}
+      />
     </>
   )
 }

@@ -1,39 +1,27 @@
 import { ReactNode } from "react"
 
-type UserData = {
-  requestedUser?: {
-    /*listings: {
-      id: number
-      createdAt: Date
-      updatedAt: Date
-      userId: number | null
-      listingName: string
-      price: number
-      description: string
-    }[]*/
+type RequestedUser = {
+  data: {
+    user: {
+      listings: {
+        id: number
+        createdAt: Date
+        updatedAt: Date
+        userId: number
+        description: string
+        listingName: string
+        price: number
+      }[]
+      email: string
+      hashedPassword: string | null
+      role: string
+    } | null
     id: number
-    email: string
     name: string | null
-    isOnline: boolean | null
+    isOnline: boolean
     description: string | null
   } | null
-
-  currentUser: {
-    /*listings: {
-      id: number
-      createdAt: Date
-      updatedAt: Date
-      userId: number | null
-      listingName: string
-      price: number
-      description: string
-    }[]*/
-    id: number
-    email: string
-    name: string | null
-    isOnline: boolean | null
-    description: string | null
-  } | null
+  isCurrentUser: boolean
 }
 
 type DescriptionProps = {
@@ -75,13 +63,16 @@ type UserLoginData = {
 }
 
 type LayoutProps = {
-  currentUser: {
-    id: number
-    email: string
-    name: string | null
-  } | null
+  currentUser: CurrentUser
   pageContent: JSX.Element | Promise<JSX.Element>
   pageType: string
 }
 
-export type { UserData, DescriptionProps, User, UserLoginData, LayoutProps }
+type CurrentUser = {
+  user: {
+    id: number | null
+  } | null
+  name: string | null | undefined
+} | null
+
+export type { CurrentUser, DescriptionProps, User, UserLoginData, LayoutProps, RequestedUser }

@@ -2,7 +2,7 @@
 import { Suspense, useState } from "react"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/navigation"
-import { User, UserData, UserLoginData } from "../../propsType"
+import { User, UserLoginData } from "../../propsType"
 import { SmallCloseIcon } from "@chakra-ui/icons"
 import {
   Flex,

@@ -21,9 +21,9 @@ import { HomePageButtons } from "./HomePageButtons"
 import { LogoutButton } from "./LogoutButton"
 import SearchBar from "./SearchBar"
 import UserMenu from "./UserMenu"
-import { User } from "../propsType"
+import { CurrentUser, User } from "../propsType"
 
-export default function WithSubnavigation(props: User) {
+export default function WithSubnavigation(props: CurrentUser) {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
@@ -71,10 +71,10 @@ export default function WithSubnavigation(props: User) {
           <Center>
             <SearchBar />
           </Center>
-          {props.user ? (
+          {props?.user ? (
             <>
               <Center>
-                <UserMenu user={props.user} listings={undefined} />
+                <UserMenu user={props.user} name={props.name} />
               </Center>
             </>
           ) : (

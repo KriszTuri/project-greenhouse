@@ -1,11 +1,11 @@
 import { Button, Link } from "@chakra-ui/react"
-import { UserData } from "../../propsType"
+import { RequestedUser } from "../../propsType"
 
-export default function ProfileButtons(props: UserData) {
-  if (props.currentUser?.id == props.requestedUser?.id) {
+export default function ProfileButtons(props: RequestedUser) {
+  if (props.isCurrentUser) {
     return (
       <>
-        <Link href={`/profiles/${props.currentUser?.id}/edit`}>
+        <Link href={`/profiles/${props.data?.id}/edit`}>
           <Button
             maxW={"200px"}
             size={"md"}

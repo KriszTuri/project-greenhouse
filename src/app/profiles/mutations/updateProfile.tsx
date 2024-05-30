@@ -1,6 +1,6 @@
 import db from "@/db"
 import { SecurePassword } from "@blitzjs/auth/secure-password"
-import { User, UserData, UserLoginData } from "../../propsType"
+import { User, UserLoginData } from "../../propsType"
 import { Ctx } from "blitz"
 
 export default async function editProfile(user: UserLoginData) {

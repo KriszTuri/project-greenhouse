@@ -12,37 +12,21 @@ import {
 } from "@chakra-ui/react"
 import ProfileButtons from "./ProfileButtons"
 import ProfilePicture from "./ProfilePicture"
-import { UserData } from "../../propsType"
+import { RequestedUser } from "../../propsType"
 import ProfileDescription from "./ProfileDescription"
 
-export default function ProfileCard(props: UserData) {
+export default function ProfileCard(props: RequestedUser) {
   return (
     <Center py={6}>
       <Box
         w={"95%"}
         bg={useColorModeValue("white", "gray.900")}
-        boxShadow={"2xl"}
         rounded={"lg"}
         p={6}
         textAlign={"center"}
       >
-        {props.requestedUser ? (
-          <>
-            <ProfilePicture isOnline={props.requestedUser.isOnline} />
-            <ProfileDescription
-              name={props.requestedUser.name}
-              description={props.requestedUser?.description}
-            />
-          </>
-        ) : (
-          <>
-            <ProfilePicture isOnline={props.currentUser?.isOnline} />
-            <ProfileDescription
-              name={props.currentUser?.name}
-              description={props.currentUser?.description}
-            />
-          </>
-        )}
+        <ProfilePicture isOnline={props.data?.isOnline} />
+        <ProfileDescription name={props.data?.name} description={props.data?.description} />
 
         <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
           <Badge px={2} py={1} bg={useColorModeValue("gray.50", "gray.800")} fontWeight={"400"}>
@@ -57,7 +41,7 @@ export default function ProfileCard(props: UserData) {
         </Stack>
 
         <Stack align={"center"} justify={"center"} mt={8} direction={"row"} spacing={4}>
-          <ProfileButtons requestedUser={props.requestedUser} currentUser={props.currentUser} />
+          <ProfileButtons data={props.data} isCurrentUser={props.isCurrentUser} />
         </Stack>
       </Box>
     </Center>
