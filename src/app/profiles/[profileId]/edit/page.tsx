@@ -7,6 +7,7 @@ import getUserById from "@/src/app/users/queries/getUserById"
 import { useQuery } from "@blitzjs/rpc"
 import getCurrentUserSettingsData from "@/src/app/users/queries/getCurrentUserSettingsData"
 import Layout from "@/src/app/components/Layout"
+import { CurrentUser } from "@/src/app/propsType"
 
 /*export async function generateMetadata({
   currentUser,
@@ -19,21 +20,27 @@ import Layout from "@/src/app/components/Layout"
 
 /// Page for /profiles/[id]/edit ///
 
-export default async function Page() {
-  const currentUser = await invoke(getCurrentUserSettingsData, null)
-
-  if (currentUser) {
-    return (
-      <div>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Layout
-            pageType="page"
-            currentUser={currentUser}
-            pageContent={<EditProfile user={currentUser} listings={undefined} />}
-          />
-        </Suspense>
-      </div>
-    )
+export default async function Page({ params }: { params: { profileId: string } }) {
+  const requestedUser = await invoke(getUserById, parseInt(params.profileId))
+  function getUserData() {
+    if (requestedUser.data) {
+      const data: CurrentUser = {
+        user: { id: requestedUser.data.id },
+        name: requestedUser.data.name,
+      }
+      return data
+    }
+    return null
   }
-  return <div>Error</div>
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Layout
+          pageType="page"
+          currentUser={getUserData()}
+          pageContent={<EditProfile data={requestedUser.data} isCurrentUser={true} />}
+        />
+      </Suspense>
+    </div>
+  )
 }
