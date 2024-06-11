@@ -1,28 +1,45 @@
 "use client"
 import { ChakraProvider, Stack, Box, useColorModeValue } from "@chakra-ui/react"
 import { Profile } from "../profiles/components/Profile"
-import { LayoutProps } from "../propsType"
 import { Header } from "./Header"
 import pageStyles from "../styles/Profile.module.css"
 import homeStyles from "../styles/Home.module.css"
 import { useEffect, useState } from "react"
+import { useLocalStorage } from "usehooks-ts"
+import { LayoutProps, RequestedUser } from "../propsType"
+import ReturnUserById from "../(auth)/data-storage/ReturnUserById"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
 export default function Layout(props: LayoutProps) {
   const [body, setBody] = useState<JSX.Element>()
   const [styles, setStyles] = useState(pageStyles)
+
   useEffect(() => {
+    const storeData = async () => {
+      try {
+        const userData = await ReturnUserById(props.currentUser?.user?.id)
+        const jsonValue = JSON.stringify(userData)
+        await AsyncStorage.setItem("user-data", jsonValue)
+      } catch (e) {
+        // saving error
+      }
+    }
+
+    window.sessionStorage.setItem("style", props.pageType)
+    storeData()
+    const pageType = window.sessionStorage.getItem("style")
     const pageContent = async (content: JSX.Element | Promise<JSX.Element>) => {
       return await content
     }
     const getContent = async () => {
       const body = await pageContent(props.pageContent)
-      if (props.pageType == "homepage") {
+      if (pageType == "homepage") {
         setStyles(homeStyles)
       }
       setBody(body)
     }
     getContent().catch(console.error)
-  }, [props.pageContent, props.pageType])
+  }, [props.currentUser?.user?.id, props.pageContent, props.pageType])
 
   return (
     <>
@@ -35,11 +52,11 @@ export default function Layout(props: LayoutProps) {
               <Header user={null} name={null} />
             )}
           </Box>
-          <Box>
+          <Box height="100%" width="100%">
             <div className={styles.globe} />
             <div className={styles.container}>
               <main className={styles.main}>
-                <div className={styles.wrapper} suppressHydrationWarning>
+                <div className={styles.wrapper}>
                   {props.pageType == "page" ? (
                     <Box
                       w={"95%"}

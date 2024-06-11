@@ -1,28 +1,45 @@
 import { ReactNode } from "react"
 
-type RequestedUser = {
-  data: {
-    user: {
-      listings: {
-        id: number
-        createdAt: Date
-        updatedAt: Date
-        userId: number
-        description: string
-        listingName: string
-        price: number
-      }[]
-      email: string
-      hashedPassword: string | null
-      role: string
-    } | null
+type ProfileList = {
+  profiles: {
     id: number
+    createdAt: Date
+    updatedAt: Date
+    userId: number | null
     name: string | null
     isOnline: boolean
     description: string | null
-  } | null
-  isCurrentUser: boolean
+    isEditing: boolean
+  }[]
+  currentUser: CurrentUser
 }
+
+type RequestedUser =
+  | {
+      data: {
+        user: {
+          listings: {
+            id: number | null | undefined
+            createdAt: Date
+            updatedAt: Date
+            userId: number | undefined
+            description: string
+            listingName: string
+            price: number
+          }[]
+          email: string
+          //hashedPassword: string | null
+          role: string
+        } | null
+        id: number | undefined
+        name: string | null
+        isOnline: boolean
+        description: string | null
+      } | null
+      isCurrentUser: boolean | undefined
+    }
+  | null
+  | undefined
 
 type DescriptionProps = {
   name: string | null | undefined
@@ -75,4 +92,12 @@ type CurrentUser = {
   name: string | null | undefined
 } | null
 
-export type { CurrentUser, DescriptionProps, User, UserLoginData, LayoutProps, RequestedUser }
+export type {
+  CurrentUser,
+  DescriptionProps,
+  User,
+  UserLoginData,
+  LayoutProps,
+  RequestedUser,
+  ProfileList,
+}

@@ -5,6 +5,8 @@ import { Box, ChakraProvider } from "@chakra-ui/react"
 import { Header } from "./components/Header"
 import LandingPageTextField from "./components/LandingPageTextField"
 import Layout from "./components/Layout"
+import { setLocalStorage } from "./propsType"
+import { useEffect } from "react"
 
 export default async function Home() {
   const currentUser = await invoke(getCurrentUser, null)

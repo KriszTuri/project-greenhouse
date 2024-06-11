@@ -6,8 +6,9 @@ import { invoke } from "../blitz-server"
 import { useCurrentUser } from "../users/hooks/useCurrentUser"
 import { BlitzPage } from "@blitzjs/auth"
 import { Profile } from "./components/Profile"
-import ProfileList from "./components/ProfileList"
 import getCurrentUserSettingsData from "../users/queries/getCurrentUserSettingsData"
+import getAllProfiles from "./queries/getAllProfiles"
+import ProfilesPage from "./components/ProfilesPage"
 //import { useSearchParams } from "next/navigation"
 
 /*export const metadata: Metadata = {
@@ -26,11 +27,11 @@ import getCurrentUserSettingsData from "../users/queries/getCurrentUserSettingsD
 
 export default async function ProfilePage() {
   //const searchParams = useSearchParams()
-  //const currentUser = useQuery(getCurrentUser(), null)
-  const currentUser = await invoke(getCurrentUserSettingsData, null)
+  const currentUser = await invoke(getCurrentUser, null)
+  const profiles = await invoke(getAllProfiles, null)
   return (
     <>
-      <ProfileList user={currentUser} listings={undefined} />
+      <ProfilesPage profiles={profiles} currentUser={currentUser} />
     </>
   )
 }

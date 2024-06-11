@@ -33,6 +33,7 @@
     "@emotion/react": "11.11.4",
     "@emotion/styled": "11.11.5",
     "@prisma/client": "5.4.2",
+    "@react-native-async-storage/async-storage": "1.23.1",
     "blitz": "2.0.6",
     "final-form": "4.20.10",
     "formik": "2.4.5",
@@ -42,6 +43,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "secure-password": "4.0.0",
+    "usehooks-ts": "3.1.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
