@@ -22,10 +22,11 @@ import { LogoutButton } from "./LogoutButton"
 import SearchBar from "./SearchBar"
 import UserMenu from "./UserMenu"
 import { CurrentUser, User } from "../propsType"
+import { useSession } from "@blitzjs/auth"
 
-export default function WithSubnavigation(props: CurrentUser) {
+export default function WithSubnavigation() {
   const { isOpen, onToggle } = useDisclosure()
-
+  const session = useSession()
   return (
     <Box>
       <Flex
@@ -71,10 +72,10 @@ export default function WithSubnavigation(props: CurrentUser) {
           <Center>
             <SearchBar />
           </Center>
-          {props?.user ? (
+          {session.userId ? (
             <>
               <Center>
-                <UserMenu user={props.user} name={props.name} />
+                <UserMenu />
               </Center>
             </>
           ) : (
@@ -267,7 +268,7 @@ const NAV_ITEMS: Array<NavItem> = [
       {
         label: "Buyers",
         subLabel: "Browse our curated listings",
-        href: "#",
+        href: `/profiles/`,
       },
       {
         label: "Sellers",

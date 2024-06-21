@@ -10,14 +10,14 @@ datasource db {
 model User {
   id Int @id @default(autoincrement())
 
-  email          String  @unique
+  email          String     @unique
   hashedPassword String?
-  role           String  @default("USER")
-
-  listings Listings[]
-  sessions Session[]
-  tokens   Token[]
-  profile  Profile[]
+  role           String     @default("USER")
+  name           String?    @default("Plantparent")
+  listings       Listings[]
+  sessions       Session[]
+  tokens         Token[]
+  profile        Profile[]
 }
 
 model Session {
@@ -54,7 +54,6 @@ model Profile {
   updatedAt   DateTime @updatedAt
   userId      Int?
   user        User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  name        String?
   isOnline    Boolean  @default(false)
   description String?
   isEditing   Boolean  @default(false)

@@ -10,6 +10,7 @@ declare module "@blitzjs/auth" {
       userId: User["id"]
       role: Role
       views?: number
+      name: string | null
     }
   }
 }

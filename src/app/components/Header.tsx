@@ -3,11 +3,12 @@ import { Box, Container, Image } from "@chakra-ui/react"
 import logo from "../public/logo.png"
 import Navbar from "./Navbar"
 import { CurrentUser, User } from "../propsType"
+import { useSession } from "@blitzjs/auth"
 
-export function Header(props: CurrentUser) {
+export function Header() {
   return (
     <Box>
-      <Navbar user={props?.user} name={props?.name} />
+      <Navbar />
     </Box>
   )
 }

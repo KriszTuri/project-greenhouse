@@ -5,12 +5,12 @@ import styles from "../../styles/Profile.module.css"
 import { Header } from "../../components/Header"
 import getUserById from "../../users/queries/getUserById"
 import { CurrentUser } from "../../propsType"
-import Layout from "../../components/Layout"
+import { PageLayout } from "../../layout"
 
 ///Page for /profiles/[id] //
 
 export default async function ProfilePage({ params }: { params: { profileId: string } }) {
-  const requestedUser = await invoke(getUserById, parseInt(params.profileId))
+  /*const requestedUser = await invoke(getUserById, parseInt(params.profileId))
   function getUserData() {
     if (requestedUser.data) {
       const data: CurrentUser = {
@@ -20,15 +20,11 @@ export default async function ProfilePage({ params }: { params: { profileId: str
       return data
     }
     return null
-  }
+  }*/
   return (
     <>
-      <Layout
-        currentUser={getUserData()}
-        pageContent={
-          <Profile data={requestedUser.data} isCurrentUser={requestedUser.isCurrentUser} />
-        }
-        pageType={"page"}
+      <PageLayout
+        body={<Profile data={requestedUser.data} isCurrentUser={requestedUser.isCurrentUser} />}
       />
     </>
   )

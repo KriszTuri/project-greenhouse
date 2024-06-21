@@ -11,23 +11,25 @@ import {
 } from "@chakra-ui/react"
 import { LogoutButton } from "./LogoutButton"
 import { CurrentUser, User } from "../propsType"
+import { useSession } from "@blitzjs/auth"
 
-export default function UserMenu(props: CurrentUser) {
+export default function UserMenu() {
   return (
     <Popover trigger={"hover"} placement={"bottom-start"} isLazy>
       <PopoverTrigger>
         <Avatar />
       </PopoverTrigger>
       <PopoverContent width="150px">
-        <UserMenuList user={props?.user} name={props?.name} />
+        <UserMenuList />
       </PopoverContent>
     </Popover>
   )
 }
 
-const UserMenuList = (props: CurrentUser) => {
+const UserMenuList = () => {
   const linkColor = useColorModeValue("gray.600", "gray.200")
   const linkHoverColor = useColorModeValue("gray.800", "white")
+  const session = useSession()
 
   return (
     <Stack
@@ -37,12 +39,12 @@ const UserMenuList = (props: CurrentUser) => {
       paddingTop="5px"
       paddingBottom="5px"
     >
-      <Box>Greetings, {props?.name}!</Box>
+      <Box>Greetings, {session.name}!</Box>
       {USER_MENU_ITEMS.map((menuItem) => (
         <Box key={menuItem.label}>
           <Link
             p={2}
-            href={`/profiles/${props?.user?.id}` ?? "#"}
+            href={`/profiles/${session.userId}` ?? "#"}
             fontSize={"m"}
             fontWeight={500}
             color={linkColor}

@@ -1,16 +1,18 @@
 "use client"
 import { Badge, Box, Button, Card, CardBody, Link, Stack, Text } from "@chakra-ui/react"
-import Layout from "../../components/Layout"
 import { ProfileList } from "../../propsType"
 import ProfilePicture from "./ProfilePicture"
 import SearchBar from "../../components/SearchBar"
 import { ChatIcon } from "@chakra-ui/icons"
+import { useSession } from "@blitzjs/auth"
+import { PageLayout } from "../../layout"
 
 export default function ProfilesPage(users: ProfileList) {
+  const session = useSession()
+  console.log(session)
   return (
-    <Layout
-      currentUser={users.currentUser}
-      pageContent={
+    <PageLayout
+      body={
         <>
           <Box w="md">
             <SearchBar />
@@ -21,7 +23,11 @@ export default function ProfilesPage(users: ProfileList) {
               <Card key={profile.id} maxW="md">
                 <CardBody>
                   <Stack direction="row" spacing="25px">
-                    <ProfilePicture isOnline={profile.isOnline} />
+                    <ProfilePicture
+                      name={profile.name}
+                      id={profile.id}
+                      currentUserId={session.userId}
+                    />
                     <Stack align="start">
                       <Text>
                         <b>Name: </b>
@@ -45,7 +51,13 @@ export default function ProfilesPage(users: ProfileList) {
                       <Button>See Profile</Button>
                     </Link>
                     <Link href={`/profiles/${profile.userId}/listings`}>
-                      <Button>See Listings</Button>
+                      <Button
+                        onClick={() => {
+                          //FetchListings()
+                        }}
+                      >
+                        See Listings
+                      </Button>
                     </Link>
                     <Button leftIcon={<ChatIcon />} colorScheme="green">
                       Message
@@ -57,7 +69,6 @@ export default function ProfilesPage(users: ProfileList) {
           </Box>
         </>
       }
-      pageType={"page"}
     />
   )
 }

@@ -1,13 +1,20 @@
 import { Avatar } from "@chakra-ui/react"
+import { useState } from "react"
+import { useOnlineStatus } from "../../users/hooks/useOnlineStatus"
 
 type ProfilePictureProps = {
-  isOnline: boolean | null | undefined
+  name: string | null | undefined
+  id: number | null | undefined
+  currentUserId: number | null | undefined
 }
 
 export default function ProfilePicture(props: ProfilePictureProps) {
+  console.log(props)
+  const isOnline = props.id === props.currentUserId ? true : false
+
   return (
     <>
-      {props.isOnline || null ? (
+      {isOnline || null ? (
         <>
           <Avatar
             size={"xl"}
