@@ -44,6 +44,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "secure-password": "4.0.0",
+    "unique-names-generator": "4.7.1",
     "usehooks-ts": "3.1.0",
     "zod": "3.22.4"
   },

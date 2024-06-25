@@ -3,14 +3,13 @@ import { useState } from "react"
 import { useOnlineStatus } from "../../users/hooks/useOnlineStatus"
 
 type ProfilePictureProps = {
-  name: string | null | undefined
   id: number | null | undefined
   currentUserId: number | null | undefined
 }
 
 export default function ProfilePicture(props: ProfilePictureProps) {
   console.log(props)
-  const isOnline = props.id === props.currentUserId ? true : false
+  const isOnline = props.id === props.currentUserId
 
   return (
     <>

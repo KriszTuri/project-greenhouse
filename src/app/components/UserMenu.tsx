@@ -10,12 +10,11 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react"
 import { LogoutButton } from "./LogoutButton"
-import { CurrentUser, User } from "../propsType"
 import { useSession } from "@blitzjs/auth"
 
 export default function UserMenu() {
   return (
-    <Popover trigger={"hover"} placement={"bottom-start"} isLazy>
+    <Popover trigger={"click"} placement={"bottom-start"} isLazy>
       <PopoverTrigger>
         <Avatar />
       </PopoverTrigger>
@@ -39,7 +38,9 @@ const UserMenuList = () => {
       paddingTop="5px"
       paddingBottom="5px"
     >
-      <Box>Greetings, {session.name}!</Box>
+      <Box width="100%" textAlign="center">
+        Greetings, {session.name}!
+      </Box>
       {USER_MENU_ITEMS.map((menuItem) => (
         <Box key={menuItem.label}>
           <Link

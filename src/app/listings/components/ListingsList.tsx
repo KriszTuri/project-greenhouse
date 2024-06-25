@@ -1,42 +1,43 @@
-"use client";
-import { usePaginatedQuery } from "@blitzjs/rpc";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import getListings from "../queries/getListings";
-import { useSearchParams } from "next/navigation";
-import { usePathname } from "next/navigation";
-import { Route } from "next";
+"use client"
+import { usePaginatedQuery } from "@blitzjs/rpc"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import getListings from "../queries/getListings"
+import { useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
+import { Route } from "next"
+import { ListingCard } from "./ListingCard"
 
-const ITEMS_PER_PAGE = 100;
+const ITEMS_PER_PAGE = 100
 
 export const ListingsList = () => {
-  const searchparams = useSearchParams()!;
-  const page = Number(searchparams.get("page")) || 0;
+  const searchparams = useSearchParams()!
+  const page = Number(searchparams.get("page")) || 0
   const [{ listings, hasMore }] = usePaginatedQuery(getListings, {
     orderBy: { id: "asc" },
     skip: ITEMS_PER_PAGE * page,
     take: ITEMS_PER_PAGE,
-  });
-  const router = useRouter();
-  const pathname = usePathname();
+  })
+  const router = useRouter()
+  const pathname = usePathname()
 
   const goToPreviousPage = () => {
-    const params = new URLSearchParams(searchparams);
-    params.set("page", (page - 1).toString());
-    router.push((pathname + "?" + params.toString()) as Route);
-  };
+    const params = new URLSearchParams(searchparams)
+    params.set("page", (page - 1).toString())
+    router.push((pathname + "?" + params.toString()) as Route)
+  }
   const goToNextPage = () => {
-    const params = new URLSearchParams(searchparams);
-    params.set("page", (page + 1).toString());
-    router.push((pathname + "?" + params.toString()) as Route);
-  };
+    const params = new URLSearchParams(searchparams)
+    params.set("page", (page + 1).toString())
+    router.push((pathname + "?" + params.toString()) as Route)
+  }
 
   return (
     <div>
       <ul>
         {listings.map((listing) => (
           <li key={listing.id}>
-            <Link href={`/listings/${listing.id}`}>{listing.name}</Link>
+            <ListingCard listing={listing} />
           </li>
         ))}
       </ul>
@@ -48,5 +49,5 @@ export const ListingsList = () => {
         Next
       </button>
     </div>
-  );
-};
+  )
+}

@@ -1,21 +1,13 @@
-import {
-  Heading,
-  Avatar,
-  Box,
-  Center,
-  Text,
-  Stack,
-  Button,
-  Link,
-  Badge,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { Box, Center, Stack, Badge, useColorModeValue } from "@chakra-ui/react"
 import ProfileButtons from "./ProfileButtons"
 import ProfilePicture from "./ProfilePicture"
-import { RequestedUser } from "../../propsType"
+import { ProfileProps } from "../../propsType"
 import ProfileDescription from "./ProfileDescription"
+import { useSession } from "@blitzjs/auth"
 
-export default function ProfileCard(props: RequestedUser) {
+export default function ProfileCard(props: ProfileProps) {
+  const session = useSession()
+
   return (
     <Center py={6}>
       <Box
@@ -25,8 +17,12 @@ export default function ProfileCard(props: RequestedUser) {
         p={6}
         textAlign={"center"}
       >
-        <ProfilePicture isOnline={props.data?.isOnline} />
-        <ProfileDescription name={props.data?.name} description={props.data?.description} />
+        <ProfilePicture id={props.user?.id} currentUserId={session.userId} />
+        <ProfileDescription
+          name={props.user?.user?.name}
+          description={props.user?.description}
+          email={props.user?.user?.email}
+        />
 
         <Stack align={"center"} justify={"center"} direction={"row"} mt={6}>
           <Badge px={2} py={1} bg={useColorModeValue("gray.50", "gray.800")} fontWeight={"400"}>
@@ -41,7 +37,7 @@ export default function ProfileCard(props: RequestedUser) {
         </Stack>
 
         <Stack align={"center"} justify={"center"} mt={8} direction={"row"} spacing={4}>
-          <ProfileButtons data={props.data} isCurrentUser={props.isCurrentUser} />
+          <ProfileButtons user={props.user} />
         </Stack>
       </Box>
     </Center>

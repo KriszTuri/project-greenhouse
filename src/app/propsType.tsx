@@ -14,36 +14,34 @@ type ProfileList = {
   currentUser: CurrentUser
 }
 
-type RequestedUser =
-  | {
-      data: {
-        user: {
-          listings: {
-            id: number | null | undefined
-            createdAt: Date
-            updatedAt: Date
-            userId: number | undefined
-            description: string
-            listingName: string
-            price: number
-          }[]
-          email: string
-          //hashedPassword: string | null
-          role: string
-        } | null
-        id: number | undefined
-        name: string | null
-        isOnline: boolean
-        description: string | null
-      } | null
-      isCurrentUser: boolean | undefined
-    }
-  | null
-  | undefined
+type RequestedUser = {
+  user: {
+    name: string | null
+    email: string
+    listings: {
+      id: number
+      userId: number
+      createdAt: Date
+      updatedAt: Date
+      description: string
+      listingName: string
+      price: number
+    }[]
+    role: string
+  } | null
+  id: number
+  isOnline: boolean
+  description: string | null
+} | null
+
+type ProfileProps = {
+  user: RequestedUser
+}
 
 type DescriptionProps = {
   name: string | null | undefined
   description: string | null | undefined
+  email: string | null | undefined
 }
 
 type User = {
@@ -100,4 +98,5 @@ export type {
   LayoutProps,
   RequestedUser,
   ProfileList,
+  ProfileProps,
 }

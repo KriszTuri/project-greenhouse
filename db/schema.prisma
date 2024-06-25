@@ -13,7 +13,7 @@ model User {
   email          String     @unique
   hashedPassword String?
   role           String     @default("USER")
-  name           String?    @default("Plantparent")
+  name           String?
   listings       Listings[]
   sessions       Session[]
   tokens         Token[]

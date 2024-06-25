@@ -3,16 +3,15 @@ import db from "db"
 
 export default async function getUserById(id: number | null, ctx: Ctx) {
   if (id == null) return null
-  const isCurrentUser = ctx.session.userId == id
   const data = await db.profile.findFirst({
-    where: { id: id },
+    where: { userId: id },
     select: {
       id: true,
-      name: true,
       isOnline: true,
       description: true,
       user: {
         select: {
+          name: true,
           email: true,
           //hashedPassword: true,
           listings: true,
@@ -21,6 +20,5 @@ export default async function getUserById(id: number | null, ctx: Ctx) {
       },
     },
   })
-
-  return { data, isCurrentUser }
+  return data
 }

@@ -1,11 +1,14 @@
 import { Button, Link } from "@chakra-ui/react"
-import { RequestedUser } from "../../propsType"
+import { ProfileProps, RequestedUser } from "../../propsType"
+import { useSession } from "@blitzjs/auth"
 
-export default function ProfileButtons(props: RequestedUser) {
-  if (props.isCurrentUser) {
+export default function ProfileButtons(props: ProfileProps) {
+  const session = useSession()
+  const isCurrentUser = session.userId === props.user?.id
+  if (isCurrentUser) {
     return (
       <>
-        <Link href={`/profiles/${props.data?.id}/edit`}>
+        <Link href={`/profiles/${props.user?.id}/edit`}>
           <Button
             maxW={"200px"}
             size={"md"}

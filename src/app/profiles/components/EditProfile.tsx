@@ -2,7 +2,7 @@
 import { Suspense, useState } from "react"
 import { useMutation, useQuery } from "@blitzjs/rpc"
 import { useRouter } from "next/navigation"
-import { RequestedUser, User, UserLoginData } from "../../propsType"
+import { ProfileProps, RequestedUser, User, UserLoginData } from "../../propsType"
 import { SmallCloseIcon } from "@chakra-ui/icons"
 import {
   Flex,
@@ -29,10 +29,11 @@ import updateProfile from "../mutations/updateProfile"
 import { FORM_ERROR, ProfileForm } from "../../users/profiles/components/ProfileForm"
 import { Field, Form, useField } from "react-final-form"
 import { SecurePassword } from "@blitzjs/auth/secure-password"
+import { useSession } from "@blitzjs/auth"
 
 /// Component rendered at /profiles/[id]/edit ///
 
-export const EditProfile = (props: RequestedUser) => {
+export const EditProfile = (props: ProfileProps) => {
   /*const [profile, { setQueryData }] = useQuery(getUserById, props.currentUser?.id, {
     // This ensures the query never refreshes and overwrites the form data while the user is editing.
     staleTime: Infinity,
@@ -41,11 +42,12 @@ export const EditProfile = (props: RequestedUser) => {
   //const [updatedUser, setUpdatedUser] = useState(props)
   const [updateProfileMutation] = useMutation(updateProfile)
   const router = useRouter()
+  const session = useSession()
 
   function getPlaceholders(user: RequestedUser) {
     const placeholders = {
-      name: user.data?.name,
-      email: user.data?.user?.email,
+      name: session.name,
+      email: user?.user?.email,
     }
     const fallbackPlaceholders = {
       name: "Your Name",
@@ -59,7 +61,7 @@ export const EditProfile = (props: RequestedUser) => {
 
   function updateUser(values: UserLoginData) {
     const updatedUser = {
-      id: props.data?.id,
+      id: props.user?.id,
       email: values.email,
       name: values.name,
       password: values.password,
@@ -91,7 +93,7 @@ export const EditProfile = (props: RequestedUser) => {
             p={6}
           >
             <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-              {props.data?.name}&apos;s Profile
+              {}&apos;s Profile
             </Heading>
             <Form
               onSubmit={onSubmit}
@@ -141,14 +143,14 @@ export const EditProfile = (props: RequestedUser) => {
                   <InputControl
                     name="name"
                     label="Username:"
-                    placeholder={getPlaceholders(props).name?.toString()}
+                    placeholder={getPlaceholders(props.user).name?.toString()}
                     type="input"
                   />
 
                   <InputControl
                     name="email"
                     label="Email:"
-                    placeholder={getPlaceholders(props).email}
+                    placeholder={getPlaceholders(props.user).email}
                     type="input"
                   />
 
@@ -159,7 +161,7 @@ export const EditProfile = (props: RequestedUser) => {
                     type="password"
                   />
                   <Stack spacing={6} direction={["column", "row"]} paddingTop={"10px"}>
-                    <Link href={`/profiles/${props.data?.id}`}>
+                    <Link href={`/profiles/${props.user?.id}`}>
                       <Button
                         bg={"red.400"}
                         color={"white"}

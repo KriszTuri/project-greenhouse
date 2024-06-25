@@ -5,15 +5,24 @@ import signup from "../mutations/signup"
 import { name, Signup } from "../validations"
 import { useMutation } from "@blitzjs/rpc"
 import { useRouter } from "next/navigation"
+import { uniqueNamesGenerator, adjectives, colors, NumberDictionary } from "unique-names-generator"
 
-type SignupFormProps = {
-  onSuccess?: () => void
+function getRandomName() {
+  const numberDictionary = NumberDictionary.generate({ min: 1, max: 99 })
+  const randomName: string = uniqueNamesGenerator({
+    dictionaries: [adjectives, colors, numberDictionary],
+    style: "capital",
+    length: 3,
+    separator: "",
+  })
+
+  return randomName
 }
 
-export const SignupForm = (props: SignupFormProps) => {
+export const SignupForm = () => {
   const [signupMutation] = useMutation(signup)
   const router = useRouter()
-
+  const randomName = getRandomName()
   return (
     <div>
       <h1>Create an Account</h1>
@@ -21,7 +30,7 @@ export const SignupForm = (props: SignupFormProps) => {
       <Form
         submitText="Create Account"
         schema={Signup}
-        initialValues={{ email: "", password: "", name: "" }}
+        initialValues={{ email: "", password: "", name: randomName }}
         onSubmit={async (values) => {
           try {
             await signupMutation(values)

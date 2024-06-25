@@ -1,36 +1,27 @@
-"use client";
-import { useMutation, useQuery } from "@blitzjs/rpc";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import deleteListing from "../mutations/deleteListing";
-import getListing from "../queries/getListing";
+"use client"
+import { useMutation, useQuery } from "@blitzjs/rpc"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+import deleteListing from "../mutations/deleteListing"
+import getListing from "../queries/getUserListingsById"
+import { Card, Stack, Text } from "@chakra-ui/react"
+import { ListingCard } from "./ListingCard"
 
-export const Listing = ({ listingId }: { listingId: number }) => {
-  const router = useRouter();
-  const [deleteListingMutation] = useMutation(deleteListing);
-  const [listing] = useQuery(getListing, { id: listingId });
+export const Listing = () => {
+  //const router = useRouter()
+  //const [deleteListingMutation] = useMutation(deleteListing)
+  //const [listing] = useQuery(getListing, { id: listingId })
+  const testListing = {
+    listingName: "testname",
+    price: "123.00€",
+    description: "This is the description.",
+    imageUrl:
+      "https://images.pexels.com/photos/736230/pexels-photo-736230.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  }
 
   return (
     <>
-      <div>
-        <h1>Project {listing.id}</h1>
-        <pre>{JSON.stringify(listing, null, 2)}</pre>
-
-        <Link href={`/listings/${listing.id}/edit`}>Edit</Link>
-
-        <button
-          type="button"
-          onClick={async () => {
-            if (window.confirm("This will be deleted")) {
-              await deleteListingMutation({ id: listing.id });
-              router.push("/listings");
-            }
-          }}
-          style={{ marginLeft: "0.5rem" }}
-        >
-          Delete
-        </button>
-      </div>
+      <ListingCard listing={testListing} />
     </>
-  );
-};
+  )
+}

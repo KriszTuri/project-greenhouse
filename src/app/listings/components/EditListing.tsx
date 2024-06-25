@@ -1,11 +1,11 @@
-"use client";
-import { Suspense } from "react";
-import updateListing from "../mutations/updateListing";
-import getListing from "../queries/getListing";
-import { UpdateListingSchema } from "../schemas";
-import { FORM_ERROR, ListingForm } from "./ListingForm";
-import { useMutation, useQuery } from "@blitzjs/rpc";
-import { useRouter } from "next/navigation";
+"use client"
+import { Suspense } from "react"
+import updateListing from "../mutations/updateListing"
+import getListing from "../queries/getUserListingsById"
+import { UpdateListingSchema } from "../schemas"
+import { FORM_ERROR, ListingForm } from "./ListingForm"
+import { useMutation, useQuery } from "@blitzjs/rpc"
+import { useRouter } from "next/navigation"
 
 export const EditListing = ({ listingId }: { listingId: number }) => {
   const [listing, { setQueryData }] = useQuery(
@@ -15,9 +15,9 @@ export const EditListing = ({ listingId }: { listingId: number }) => {
       // This ensures the query never refreshes and overwrites the form data while the user is editing.
       staleTime: Infinity,
     }
-  );
-  const [updateListingMutation] = useMutation(updateListing);
-  const router = useRouter();
+  )
+  const [updateListingMutation] = useMutation(updateListing)
+  const router = useRouter()
   return (
     <>
       <div>
@@ -33,19 +33,19 @@ export const EditListing = ({ listingId }: { listingId: number }) => {
                 const updated = await updateListingMutation({
                   ...values,
                   id: listing.id,
-                });
-                await setQueryData(updated);
-                router.refresh();
+                })
+                await setQueryData(updated)
+                router.refresh()
               } catch (error: any) {
-                console.error(error);
+                console.error(error)
                 return {
                   [FORM_ERROR]: error.toString(),
-                };
+                }
               }
             }}
           />
         </Suspense>
       </div>
     </>
-  );
-};
+  )
+}
