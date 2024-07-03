@@ -1,5 +1,5 @@
 "use client"
-import { useMutation } from "@blitzjs/rpc"
+import { useMutation, useQuery } from "@blitzjs/rpc"
 import { Button, Image } from "@chakra-ui/react"
 import axios from "axios"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
@@ -44,7 +44,7 @@ export async function fetchData(setTestListing: Dispatch<SetStateAction<testList
 export default function FetchListings() {
   const [testListing, setTestListing] = useState<testListing>()
   //const createNewTestListing = useMutation(createListing)
-  const saveListing = useMutation(createListing)
+  const saveListing = useQuery(createListing, testListing)
 
   /*useEffect(() => {
     fetchData(setTestListing)
