@@ -8,7 +8,6 @@ type ProfilePictureProps = {
 }
 
 export default function ProfilePicture(props: ProfilePictureProps) {
-  console.log(props)
   const isOnline = props.id === props.currentUserId
 
   return (
