@@ -8,9 +8,6 @@ import { Card, Stack, Text } from "@chakra-ui/react"
 import { ListingCard } from "./ListingCard"
 
 export const Listing = () => {
-  //const router = useRouter()
-  //const [deleteListingMutation] = useMutation(deleteListing)
-  //const [listing] = useQuery(getListing, { id: listingId })
   const testListing = {
     listingName: "testname",
     price: "123.00€",

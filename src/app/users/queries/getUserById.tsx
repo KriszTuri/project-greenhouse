@@ -13,7 +13,6 @@ export default async function getUserById(id: number | null, ctx: Ctx) {
         select: {
           name: true,
           email: true,
-          //hashedPassword: true,
           listings: true,
           role: true,
         },

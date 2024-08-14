@@ -7,15 +7,8 @@ export default async function getUserListingsById(id: number | null, ctx: Ctx) {
     where: { userId: id },
     select: {
       listingName: true,
-      //createdAt: true,
       price: true,
       description: true,
-      /*user: {
-        select: {
-          name: true,
-          email: true,
-        },
-      },*/
     },
   })
   return listings

@@ -9,15 +9,6 @@ import getCurrentUserSettingsData from "@/src/app/users/queries/getCurrentUserSe
 import { CurrentUser } from "@/src/app/propsType"
 import { PageLayout } from "@/src/app/layout"
 
-/*export async function generateMetadata({
-  currentUser,
-}: UserData): Promise<Metadata> {
-  //const Profile = await invoke(getProfile, { id: Number(currentUser?.id) });
-  return {
-    title: `Edit Profile ${Profile.id} - ${Profile.name}`,
-  };
-}*/
-
 /// Page for /profiles/[id]/edit ///
 
 export default async function Page({ params }: { params: { profileId: string } }) {

@@ -9,7 +9,6 @@ import { PageLayout } from "../../layout"
 
 export default function ProfilesPage(users: ProfileList) {
   const session = useSession()
-  console.log(session)
   return (
     <PageLayout
       body={
@@ -53,7 +52,6 @@ export default function ProfilesPage(users: ProfileList) {
                     <Link href={`/profiles/${profile.userId}/listings`}>
                       <Button
                         onClick={() => {
-                          //FetchListings()
                         }}
                       >
                         See Listings

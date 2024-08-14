@@ -12,7 +12,6 @@ type ListingData = {
         listingName: string
         price: string | number
         description: string
-        //imageUrl: string | undefined
       }
     | undefined
 }

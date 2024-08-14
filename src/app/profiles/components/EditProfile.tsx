@@ -34,12 +34,6 @@ import { useSession } from "@blitzjs/auth"
 /// Component rendered at /profiles/[id]/edit ///
 
 export const EditProfile = (props: ProfileProps) => {
-  /*const [profile, { setQueryData }] = useQuery(getUserById, props.currentUser?.id, {
-    // This ensures the query never refreshes and overwrites the form data while the user is editing.
-    staleTime: Infinity,
-  })*/
-
-  //const [updatedUser, setUpdatedUser] = useState(props)
   const [updateProfileMutation] = useMutation(updateProfile)
   const router = useRouter()
   const session = useSession()
@@ -72,7 +66,6 @@ export const EditProfile = (props: ProfileProps) => {
   async function onSubmit(values: UserLoginData) {
     const updatedUser = updateUser(values)
     updateProfileMutation(updatedUser)
-    console.log(updateUser(values))
     router.refresh()
   }
 

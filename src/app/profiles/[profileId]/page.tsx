@@ -11,7 +11,6 @@ import { CurrentUser } from "../../propsType"
 export default async function ProfilePage({ params }: { params: { profileId: string } }) {
   const profileId = parseInt(params.profileId)
   const requestedUser = await invoke(getUserById, profileId)
-  //const isCurrentUser = requestedUser?.id === ctx.session.userId
 
   return (
     <>

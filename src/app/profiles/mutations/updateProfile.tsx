@@ -4,7 +4,6 @@ import { User, UserLoginData } from "../../propsType"
 import { Ctx } from "blitz"
 
 export default async function editProfile(user: UserLoginData) {
-  //const hashedPassword = await SecurePassword.hash(user.password as string)
 
   async function updateUser() {
     const updateUserProfile = await db.profile.update({

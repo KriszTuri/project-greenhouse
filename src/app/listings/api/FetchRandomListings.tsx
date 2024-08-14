@@ -35,7 +35,6 @@ export async function fetchData(setTestListing: Dispatch<SetStateAction<testList
       imageUrl: response.data.default_image.original_url,
     }
     setTestListing(fetchedTestListing)
-    console.log(fetchedTestListing)
   } catch (error) {
     console.error("Error fetching data:", error)
   }
@@ -43,12 +42,8 @@ export async function fetchData(setTestListing: Dispatch<SetStateAction<testList
 
 export default function FetchListings() {
   const [testListing, setTestListing] = useState<testListing>()
-  //const createNewTestListing = useMutation(createListing)
   const saveListing = useQuery(createListing, testListing)
 
-  /*useEffect(() => {
-    fetchData(setTestListing)
-  }, [])*/
   return (
     <>
       <Button
